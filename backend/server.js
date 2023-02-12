@@ -1,6 +1,7 @@
 require("dotenv").config();
 const { urlencoded } = require("express");
 const express = require("express");
+const mongoose = require("mongoose");
 const gymRouter = require("./routes/gym");
 
 // express app
@@ -13,10 +14,18 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 
-// Router for routes
+// routes
 app.use("/api/gym", gymRouter);
-
-// Listen for client's requests
-app.listen(process.env.PORT, () => {
-  console.log(`Listening on port ${process.env.PORT}!!!`);
-});
+mongoose.set("strictQuery", false);
+// Connect to the DB
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => {
+    // Listen for requests
+    app.listen(process.env.PORT, () => {
+      console.log(`Connect to DB and Listening on port ${process.env.PORT}!!!`);
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
