@@ -3,9 +3,12 @@ const { urlencoded } = require("express");
 const express = require("express");
 const mongoose = require("mongoose");
 const gymRouter = require("./routes/gym");
-
+const cors = require("cors");
 // express app
 const app = express();
+
+// CORS
+app.use(cors());
 
 //middleware
 app.use((req, res, next) => {
