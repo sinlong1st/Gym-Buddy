@@ -4,4 +4,5 @@ Features:
 + Set up workouts road map
 + Add/Update/Delete your workout
 + Login/profile
++ Add to favorite
 Technologies: MERN Stack => MongoDB, ExpressJS, React, NodeJS | Postman
